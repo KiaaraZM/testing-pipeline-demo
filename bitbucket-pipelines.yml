@@ -1,0 +1,19 @@
+image: python:3.11
+
+pipelines:
+  default:
+    - step:
+        name: Run Tests
+        caches:
+          - pip
+        script:
+          - pip install -r requirements.txt
+          - pytest tests/ --tb=short -v
+
+  branches:
+    main:
+      - step:
+          name: Run Tests on Main
+          script:
+            - pip install -r requirements.txt
+            - pytest tests/ --tb=short -v
